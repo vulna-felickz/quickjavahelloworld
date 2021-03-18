@@ -1,4 +1,5 @@
 /target
+/codeql-runner
 /.classpath
 /.project
 /.settings
