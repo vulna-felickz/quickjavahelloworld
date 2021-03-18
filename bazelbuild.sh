@@ -11,7 +11,7 @@ codeql-runner-macos init \
     --languages 'java'\
 
 . codeql-runner/codeql-env.sh
-​
+
 bazel shutdown 
 
 bazel clean
