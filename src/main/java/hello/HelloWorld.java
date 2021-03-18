@@ -1,5 +1,6 @@
-package src.main.java.app;
-public class app {
+package src.main.java.hello;
+
+public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, World!"); 
         String disp = "";
