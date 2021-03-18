@@ -1,0 +1,3 @@
+queries:
+  - name: Concat In Java Loops
+    uses: ./my-basic-queries/ConcatenationInLoops.ql
