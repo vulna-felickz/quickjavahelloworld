@@ -10,7 +10,7 @@
  *       maintainability
  */
 
-import java;
+import java
 import semmle.code.java.Type
 import semmle.code.java.Expr
 import semmle.code.java.Statement
