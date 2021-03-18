@@ -5,7 +5,7 @@
  * @kind problem
  * @problem.severity warning
  * @precision low
- * @id java/string-concatenation-in-loop
+ * @id java/affraes-string-concatenation-in-loop
  * @tags efficiency
  *       maintainability
  */
