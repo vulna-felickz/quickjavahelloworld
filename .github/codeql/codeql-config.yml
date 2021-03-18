@@ -1,5 +1,3 @@
 queries:
-  - name: Stanbdard security
-    uses: security
   - name: Concat Strings In Java Loops
     uses: ./my-basic-queries/ConcatenationInLoops.ql
