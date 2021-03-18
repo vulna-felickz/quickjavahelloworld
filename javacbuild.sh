@@ -11,7 +11,7 @@ codeql-runner-macos init \
     --languages 'java'\
 
 . codeql-runner/codeql-env.sh
-​
+
 # Execution from macOS
 $CODEQL_RUNNER javac src/main/java/hello/HelloWorld.java
 ​
