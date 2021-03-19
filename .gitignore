@@ -10,3 +10,4 @@ bazel-out
 bazel-quickhelloworld
 bazel-testlogs
 bazel-bin
+java-database
