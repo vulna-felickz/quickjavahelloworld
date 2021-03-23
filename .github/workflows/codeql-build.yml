@@ -4,6 +4,9 @@ name: CodeQL CLI test
 
 # Controls when the action will run. 
 on:
+  push:
+    paths:
+      - '.github/workflows/codeql-build.yml'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -44,5 +47,6 @@ jobs:
           codeql/codeql database create --source-root . --language java -vvvv --log-to-stderr --command "bazel build --spawn_strategy=local --nouse_action_cache --modify_execution_info MNEMONIC=+no-cache //:app" java-db
           
       - name: Print logs
+        if: always()
         run: |
           cat java-db/log/build-tracer.log
