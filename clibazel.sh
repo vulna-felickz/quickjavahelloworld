@@ -10,6 +10,8 @@ rm -rf /private/var/tmp/_bazel_$USERNAME
 
 rm -rf bazel-*
 
+export SEMMLE_JAVA_INTERCEPT_VERBOSITY=6
+export SEMMLE_JAVA_INTERCEPT_LOG_FILE=true
 
 mkdir -p java-database
 
