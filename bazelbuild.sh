@@ -3,25 +3,46 @@
 GIT_BRANCH="refs/heads/$(git branch --show-current)"
 GIT_HASH=$(git rev-parse HEAD)
 
-ls
-# helloworld.java
-codeql-runner-macos init \
+THEPATH=$PWD
+BUNDLE=./codeqlbinaries/$1
+THECONFIGFILE=./.github/codeql/codeql-config.yml
+
+if test -d "$BUNDLE"; then
+  echo "Executing with:"
+  echo "... the path to where we executed this from: $THEPATH"
+  echo "... codeql cli binary: $BUNDLE/codeql"
+  echo "... config file: $THECONFIGFILE"
+  
+  codeql-runner-macos init \
     --github-url 'https://github.com' \
     --repository 'affrae/quickhelloworld' \
-    --languages 'java'
+    --languages 'java' \
+    --codeql-path $BUNDLE/codeql \
+    --config-file $THECONFIGFILE \
+    --debug
+  
+  . codeql-runner/codeql-env.sh
 
-. codeql-runner/codeql-env.sh
+  bazel shutdown 
 
-bazel shutdown 
+  bazel clean
 
-bazel clean
+  # Execution from macOS
+  $CODEQL_RUNNER bazel build --spawn_strategy=local --nouse_action_cache //:app
 
-# Execution from macOS
-$CODEQL_RUNNER bazel build --spawn_strategy=local --nouse_action_cache //:app
+  codeql-runner-macos analyze --github-url 'https://github.com' --repository 'affrae/quickhelloworld' --commit $GIT_HASH --no-upload --ref $GIT_BRANCH
 
-codeql-runner-macos analyze \
-    --github-url 'https://github.com' \
-    --repository 'affrae/quickhelloworld' \
-    --commit $GIT_HASH \
-    --no-upload \
-    --ref $GIT_BRANCH
+  APP=./bazel-bin/app
+
+  if test -f "$APP"; then
+    echo "Executing $APP"
+    ./bazel-bin/app
+    exit 0
+  else 
+    echo "$APP does not exist"
+    exit 2
+  fi
+else 
+  echo "$BINARY does not exist"
+  exit 1
+fi
