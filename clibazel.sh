@@ -6,7 +6,10 @@ timestamp() {
   date +"%Y%m%d.%H%M%S" # current time
 }
 
-BINARY=./codeqlbinaries/$1/codeql
+THEPATH=$PWD
+
+BINARY=$THEPATH/codeqlbinaries/$1/codeql
+
 if test -f "$BINARY"; then
   echo "Executing with codeql cli binary: $BINARY"
 
