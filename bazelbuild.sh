@@ -56,6 +56,6 @@ if test -d "$BUNDLE"; then
     exit 2
   fi
 else 
-  echo "$BINARY does not exist"
+  echo "$BUNDLE does not exist"
   exit 1
 fi
