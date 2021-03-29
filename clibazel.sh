@@ -8,7 +8,7 @@ timestamp() {
 
 BINARY=./codeqlbinaries/$1/codeql
 if test -f "$BINARY"; then
-  echo "Will be running $BINARY"
+  echo "Executing with codeql cli binary: $BINARY"
 
   # rm -rf /private/var/tmp/_bazel_$USERNAME 
 
@@ -37,7 +37,16 @@ if test -f "$BINARY"; then
   # $BINARY database create "java-database/$(timestamp)" --language=java -vvvv --command="bazel shutdown" --command="bazel clean --expunge" --command "bazel build --spawn_strategy=local --nouse_action_cache --modify_execution_info MNEMONIC=+no-cache //:app" --source-root . 
 
   # $BINARY database create "java-database/$(timestamp)" --language=java -vvvv --command="bazel shutdown" --command="bazel clean --expunge" --command "bazel build --strategy=standalone --spawn_strategy=standalone --nouse_action_cache --modify_execution_info MNEMONIC=+no-cache //:app" --source-root . 
-  exit 0
+  APP=./bazel-bin/app
+
+  if test -f "$APP"; then
+    echo "Executing $APP"
+    ./bazel-bin/app
+    exit 0
+  else 
+    echo "$APP does not exist"
+    exit 2
+  fi
 else 
   echo "$BINARY does not exist"
   exit 1
