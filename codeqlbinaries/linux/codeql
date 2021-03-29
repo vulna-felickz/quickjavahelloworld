@@ -15,7 +15,7 @@ if [ -z "$CODEQL_PLATFORM" ] ; then
         *Darwin*)
             CODEQL_PLATFORM=osx64
             ;;
-        *MINGW*)
+        *MINGW* | MSYS*)
             CODEQL_PLATFORM=win64
             pwdExtraArg=-W
             ;;
