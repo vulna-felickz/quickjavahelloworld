@@ -28,12 +28,20 @@ if test -d "$BUNDLE"; then
   
   . $THEPATH/codeql-runner/codeql-env.sh
 
+  echo "\$CODEQL_RUNNER = $CODEQL_RUNNER" 
+
   bazel shutdown 
 
   bazel clean --expunge
 
+  if [[ "$1" == "macos" ]]
+  then
   # Execution from macOS
-  $CODEQL_RUNNER bazel build --spawn_strategy=local --nouse_action_cache //:app
+    echo "\$CODEQL_RUNNER = $CODEQL_RUNNER" 
+    $CODEQL_RUNNER bazel build --spawn_strategy=local --nouse_action_cache //:app
+  else
+    bazel build --spawn_strategy=local --nouse_action_cache //:app
+  fi
 
   codeql-runner-$1 analyze --github-url 'https://github.com' --repository 'affrae/quickhelloworld' --commit $GIT_HASH --no-upload --ref $GIT_BRANCH
 
