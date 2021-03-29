@@ -11,3 +11,4 @@ bazel-quickhelloworld
 bazel-testlogs
 bazel-bin
 java-database
+my-basic-queries/.cache
