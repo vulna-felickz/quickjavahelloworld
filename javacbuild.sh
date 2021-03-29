@@ -3,12 +3,12 @@
 GIT_BRANCH="refs/heads/$(git branch --show-current)"
 GIT_HASH=$(git rev-parse HEAD)
 
-ls
 # helloworld.java
 codeql-runner-macos init \
     --github-url 'https://github.com' \
     --repository 'affrae/quickhelloworld' \
-    --languages 'java'
+    --languages 'java' \
+    --config-file '.github/codeql/codeql-config.yml'
 
 . codeql-runner/codeql-env.sh
 
