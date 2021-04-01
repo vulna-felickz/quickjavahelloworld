@@ -27,6 +27,7 @@ if test -d "$BUNDLE"; then
   echo "... codeql cli binary: $BUNDLE/codeql"
   echo "... config file: $THECONFIGFILE"
 
+  echo "Brute force removing prior bazel output..."
   rm -rf $THEPATH/bazel-*
 
   export SEMMLE_JAVA_INTERCEPT_VERBOSITY=6
@@ -63,7 +64,7 @@ if test -d "$BUNDLE"; then
 
   if test -f "$APP"; then
     echo "Executing $APP"
-    $THEPATH/bazel-bin/app
+    $APP
   else 
     echo "$APP does not exist"
     exit 2
