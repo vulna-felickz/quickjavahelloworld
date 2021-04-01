@@ -1,8 +1,10 @@
 # quickjavahelloworld
 
-This repository contains an example of a "hello world" java application along with a known example of a nomn-best practice java coding exmple of concatenating loops in a string.
+This repository contains an example of a "hello world" java application along with a known example of a non-best practice java coding exmple of concatenating loops in a string.
 
 The original idea was to understand how we can get both the codeql-runner and codeql CLI tools to work with [bazel](https://bazel.build/)
+
+There is also a custom query at /my-basic-queries, to pick up the loop string concatenation. This gives a base example on how to include custom queries. Teh query itself is just a copy of the standard one at https://github.com/github/codeql/blob/main/java/ql/src/Performance/ConcatenationInLoops.ql but with a custom `@id java/affraes-string-concatenation-in-loop` so we can see it being picked up in analysis 
 
 ## Setup
 
