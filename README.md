@@ -15,7 +15,7 @@ You will need to have `bazel` installed on your system and available in your $PA
 
 - On a mac you can do this with [homebrew](https://brew.sh) and the command `brew install bazel`
 
-You will also need the OS specific `codeql-runner` for your platform (eg `codeql-runner-macos` or `codeql-runner-linux`)and available in your $PATH. See https://docs.github.com/en/code-security/secure-coding/running-codeql-code-scanning-in-your-ci-system#downloading-the-codeql-runner for further details
+You will also need the OS specific `codeql-runner` for your platform (eg `codeql-runner-macos` or `codeql-runner-linux`) available in your $PATH. See https://docs.github.com/en/code-security/secure-coding/running-codeql-code-scanning-in-your-ci-system#downloading-the-codeql-runner for further details
 
 A setup script is forthcoming.
 
