@@ -6,6 +6,6 @@
 /.vscode
 .DS_Store
 *.class
-bazel-*
-java-database
-my-basic-queries/.cache
+/bazel-*
+/java-database
+/my-basic-queries/.cache
