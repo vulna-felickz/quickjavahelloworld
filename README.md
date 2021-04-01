@@ -4,7 +4,10 @@ This repository contains an example of a "hello world" java application along wi
 
 The original idea was to understand how we can get both the codeql-runner and codeql CLI tools to work with [bazel](https://bazel.build/)
 
-There is also a custom query at /my-basic-queries, to pick up the loop string concatenation. This gives a base example on how to include custom queries. Teh query itself is just a copy of the standard one at https://github.com/github/codeql/blob/main/java/ql/src/Performance/ConcatenationInLoops.ql but with a custom `@id java/affraes-string-concatenation-in-loop` so we can see it being picked up in analysis 
+There is also a custom query at /my-basic-queries, to pick up the loop string concatenation. This gives a base example on how to include custom queries. Teh query itself is just a copy of the standard one at https://github.com/github/codeql/blob/main/java/ql/src/Performance/ConcatenationInLoops.ql but with a custom `@id java/affraes-string-concatenation-in-loop` so we can see it being picked up in analysis
+
+## Notes
+There is a bug in the current public build of the codeql CLI tool that does not pass on all the required environment variables to bazel. This is fixed in a bleeding edge build of codeql - the tool and bundle for which is contained in /codeqlbinaries (in OS-specific sub-directories). The scripts use this bundle where necessary.
 
 ## Setup
 
@@ -12,7 +15,7 @@ You will need to have bazel installed on your system and available in your $PATH
 
 - On a mac you can do this with [homebrew](https://brew.sh) and the command `brew install bazel`
 
-You will also need the OS specific `codeql-runner` for your platform (eg `codeql-runner-macos` or `codeql-runner-linux`)and available in your $PATH.
+You will also need the OS specific `codeql-runner` for your platform (eg `codeql-runner-macos` or `codeql-runner-linux`)and available in your $PATH. See https://docs.github.com/en/code-security/secure-coding/running-codeql-code-scanning-in-your-ci-system#downloading-the-codeql-runner for further details
 
 A setup sctipt is forthcoming.
 
