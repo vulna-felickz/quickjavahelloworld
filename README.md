@@ -1,1 +1,26 @@
 # quickjavahelloworld
+
+This repository contains an example of a "hello world" java application along with a known example of a nomn-best practice java coding exmple of concatenating loops in a string.
+
+The original idea was to understand how we can get both the codeql-runner and codeql CLI tools to work with [bazel](https://bazel.build/)
+
+## Setup
+
+You will need to have bazel installed on your system and available in your $PATH.
+
+- On a mac you can do this with [homebrew](https://brew.sh) and the command `brew install bazel`
+
+You will also need the OS specific `codeql-runner` for your platform (eg `codeql-runner-macos` or `codeql-runner-linux`)and available in your $PATH.
+
+A setup sctipt is forthcoming.
+
+## Scripts (tested on macOS, not tested on linux, not written for win support, yet)
+
+Some of these tools require `macos` or `linux` as an argument so they can execute the OS specific versions
+- `mvnexec.sh` - just does a mavan build package and exec. Does not do anything involving bazel or codeql
+- `javacbuild.sh` - uses `javac`. Performs a `codeql-runner-OS init` and `anazlyze` (with no uploading of results). Usage: `./javacbuild.sh macos|linux`
+- `clibazel.sh` - uses the codeql CLI tool to create a codeql database using bazel as the build tool. Usage: `./clibazel.sh macos|linux`
+- `bazelbuild.sh` - uses the codeql-runner-OS tool to create a codeql database using bazel as the build tool. Usage: `./bazelbuild.sh macos|linux`
+
+
+## Workflows
