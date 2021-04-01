@@ -8,10 +8,13 @@ case "$(uname -s)" in
         THEOS=macos
         ;;
     *MINGW* | MSYS*)
-        error "Windows currently not supported."
+        echo "Windows currently not supported."
+        exit 1
         ;;
     *)
-        error "Unknown operating system '$(uname -s)' (full uname: $(uname -a)."
+        echo "Unknown operating system '$(uname -s)' (full uname: $(uname -a)."
+        exit 2
+
 esac
 
 timestamp () {
@@ -46,9 +49,9 @@ if test -f "$BINARY"; then
     $APP
   else 
     echo "$APP does not exist"
-    exit 2
+    exit 3
   fi
 else 
   echo "$BINARY does not exist"
-  exit 1
+  exit 4
 fi
