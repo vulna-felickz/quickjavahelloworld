@@ -1,6 +1,6 @@
 # quickjavahelloworld
 
-This repository contains an example of a "hello world" java application along with a known example of a non-best practice java coding exmple of concatenating loops in a string.
+This repository contains an example of a "hello world" java application along with a known non-best practice java coding example of concatenating loops in a string.
 
 The original idea was to understand how we can get both the codeql-runner and codeql CLI tools to work with [bazel](https://bazel.build/)
 
