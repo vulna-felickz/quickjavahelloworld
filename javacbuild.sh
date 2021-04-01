@@ -1,4 +1,5 @@
 #! /bin/zsh
+
 case "$(uname -s)" in
     *Linux*)
         THEOS=linux
