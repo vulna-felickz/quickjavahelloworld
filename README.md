@@ -2,7 +2,7 @@
 
 This repository contains an example of a "hello world" java application along with a known non-best practice java coding example of concatenating loops in a string.
 
-The original idea was to understand how we can get both the codeql-runner and codeql CLI tools to work with [bazel](https://bazel.build/)
+The original idea was to understand how we can get both the `codeql-runner-*` and `codeql` CLI tools to work with [bazel](https://bazel.build/)
 
 There is also a custom query at /my-basic-queries, to pick up the loop string concatenation. This gives a base example on how to include custom queries. The query itself is just a copy of the standard one at https://github.com/github/codeql/blob/main/java/ql/src/Performance/ConcatenationInLoops.ql but with a custom `@id java/affraes-string-concatenation-in-loop` so we can see it being picked up in analysis
 
@@ -23,9 +23,9 @@ A setup script is forthcoming.
 
 Some of these tools require `macos` or `linux` as an argument so they can execute the OS specific versions
 - `mvnexec.sh` - just does a mavan build package and exec. Does not do anything involving bazel or codeql
-- `javacbuild.sh` - uses `javac`. Performs a `codeql-runner-OS init` and `anazlyze` (with no uploading of results). Usage: `./javacbuild.sh macos|linux`
+- `javacbuild.sh` - uses `javac`. Performs a `codeql-runner-* init` and `anazlyze` (with no uploading of results). Usage: `./javacbuild.sh macos|linux`
 - `clibazel.sh` - uses the codeql CLI tool to create a codeql database using bazel as the build tool. Usage: `./clibazel.sh macos|linux`
-- `bazelbuild.sh` - uses the codeql-runner-OS tool to create a codeql database using bazel as the build tool. Usage: `./bazelbuild.sh macos|linux`
+- `bazelbuild.sh` - uses the `codeql-runner-*` tool to create a codeql database using bazel as the build tool. Usage: `./bazelbuild.sh macos|linux`
 
 
 ## Workflows
