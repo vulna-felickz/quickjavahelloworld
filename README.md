@@ -30,5 +30,5 @@ Some of these tools require `macos` or `linux` as an argument so they can execut
 
 ## Workflows
 
-There is a standard `codeql-analysis.yml` workflow file that autobuilds and analyzes so you can see this in actions without using `bazel`
+There is a standard `codeql-analysis.yml` GtHub Actions workflow file that autobuilds and analyzes so you can see this in actions without using `bazel`
 In addition, there is a `codeql-build.yml` workflow that simply uses a GitHub Actions-supplied Linux VM to execute a codeql database build with `bazel`. This, however, uses the latest publicly available version of the `codeql` CLI tool and will currently break until the fix is released, but is included so you can get an idea of how it would work.
