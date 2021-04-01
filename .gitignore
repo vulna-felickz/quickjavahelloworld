@@ -6,9 +6,6 @@
 /.vscode
 .DS_Store
 *.class
-bazel-out
-bazel-quickhelloworld
-bazel-testlogs
-bazel-bin
+bazel-*
 java-database
 my-basic-queries/.cache
