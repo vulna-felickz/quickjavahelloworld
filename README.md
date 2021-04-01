@@ -22,9 +22,9 @@ A setup script is forthcoming.
 ## Scripts (tested on macOS, not tested on linux, not written for win support, yet)
 
 - `mvnexec.sh` - just does a maven `build`, `package` and `exec` process. Does not do anything involving `bazel` or `codeql`
-- `javacbuild.sh` - uses `javac`. Performs a `codeql-runner-* init` and `anazlyze` (with no uploading of results). Usage: `./javacbuild.sh`
+- `javacbuild.sh` - uses `javac`. Performs a `codeql-runner-* init` and `analyze` (with no uploading of results). Usage: `./javacbuild.sh`
 - `clibazel.sh` - uses the `codeql` CLI tool to create a CodeQL database using `bazel` as the build tool. Usage: `./clibazel.sh`
-- `bazelbuild.sh` - uses the `codeql-runner-*` tool to create a codeql database using `bazel` as the build tool. Usage: `./bazelbuild.sh`
+- `bazelbuild.sh` - uses `bazel`. Performs a `codeql-runner-* init` and `analyze` (with no uploading of results). Usage: `./bazelbuild.sh`
 
 
 ## Workflows
