@@ -45,15 +45,15 @@ jobs:
       with:
         java-version: 8
 
-    - name: Install Bazel package source
-      run: |
-        sudo apt install apt-transport-https curl gnupg
-        curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg
-        sudo mv bazel.gpg /etc/apt/trusted.gpg.d/
-        echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+#     - name: Install Bazel package source
+#       run: |
+#         sudo apt install apt-transport-https curl gnupg
+#         curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg
+#         sudo mv bazel.gpg /etc/apt/trusted.gpg.d/
+#         echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+    
     - name: Install Bazel
       run: sudo apt update && sudo apt install bazel
-      
       
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -70,8 +70,13 @@ jobs:
         
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
+    # - name: Autobuild
+    #   uses: github/codeql-action/autobuild@v2
 
-    - name: Create CodeQL database
+    # Disable Autobuild on lines 73 and 74, then execute the build using Bazel.  
+    # Important Note! - Make sure to configure the spaqwn strategy as "local" and add the flag "nouse_action_cache". CodeQL is not able to 
+    # support caching and distributed builds.
+    - name: Build commands using Bazel
       run: |
         set -x
         bazel shutdown
