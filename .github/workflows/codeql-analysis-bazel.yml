@@ -42,6 +42,6 @@ jobs:
 
 
       - run: |
-           USE_BAZEL_VERSION=4.2.2 bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:ProjectRunner
+           USE_BAZEL_VERSION=4.2.2 bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
