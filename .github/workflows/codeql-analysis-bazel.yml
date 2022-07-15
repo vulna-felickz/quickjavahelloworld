@@ -14,11 +14,13 @@ name: "Code Scanning - Bazel"
 on:
   push:
     branches: [ main ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ main ]
+  workflow_dispatch:    
 
 jobs:
   CodeQL-Build:
-    # If you're only analyzing JavaScript or Python, CodeQL runs on ubuntu-latest, windows-latest, and macos-latest.
-    # If you're analyzing C/C++, C#, Go, or Java, CodeQL runs on ubuntu-latest, windows-2019, and macos-latest.
     runs-on: ubuntu-latest
 
     permissions:
@@ -32,20 +34,32 @@ jobs:
         uses: actions/checkout@v2
 
       - uses: bazelbuild/setup-bazelisk@v2
-
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
+      
+          # Initializes the CodeQL tools for scanning.
+      - name: Initialize CodeQL - Init DB and start trace
         uses: github/codeql-action/init@v2
         with:
           languages: java
-          debug:  true
+          # If you wish to specify custom queries, you can do so here or in a config file.
+          # By default, queries listed here will override any specified in a config file.
+          # Prefix the list here with "+" to use these queries and those in the config file.
 
-      - name: CodeQL trace build step
+          # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+          # queries: security-extended,security-and-quality
+
+
+      # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
+      # If this step fails, then you should remove it and run the build manually (see below)
+      #- name: Autobuild
+      #  uses: github/codeql-action/autobuild@v2
+
+      # ℹ️ Command-line programs to run using the OS shell.
+      # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+
+      #   If the Autobuild fails above, remove it and uncomment the following three lines. 
+      #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
+      - name: Build
         run: |
-          set -x
-          
-          # REF: https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/
-          
           # Before building, remove cached objects
           # and stop all running Bazel server processes.
           bazel clean --expunge
@@ -53,13 +67,15 @@ jobs:
           # Build using the following Bazel flags, to help CodeQL detect the build:
           # `--spawn_strategy=local`: build locally, instead of using a distributed build
           # `--nouse_action_cache`: turn off build caching, which might prevent recompilation of source code
-          # `--noremote_accept_cached`, `--noremote_upload_local_results`: avoid using a remote cache     
+          # `--noremote_accept_cached`, `--noremote_upload_local_results`: avoid using a remote cache
           bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
-
+          
           # After building, stop all running Bazel server processes.
           # This ensures future build commands start in a clean Bazel server process
           # without CodeQL attached.
           bazel shutdown
 
-      - name: Perform CodeQL Analysis
+      - name: Finalize the CodeQL DB - Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+
+ 
