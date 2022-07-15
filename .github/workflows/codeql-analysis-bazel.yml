@@ -9,7 +9,7 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "Code Scanning - Bazel 4.2.2"
+name: "Code Scanning - Bazel"
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - uses: bazelbuild/setup-bazelisk@v1
+      - uses: bazelbuild/setup-bazelisk@v2
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
@@ -41,7 +41,21 @@ jobs:
           debug: true
 
 
-      - run: |
-           USE_BAZEL_VERSION=4.2.2 bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
+      - name: CodeQL trace build step
+        run: |
+          set -x
+          
+          # This stops all running Bazel server processes
+          bazel shutdown
+
+          # This makes sure that Bazel doesn't use cached objects before building
+          bazel clean --expunge
+
+          # This builds the code with:
+          # * --spawn_strategy=local : a local build strategy verses a distributed system
+          # * --nouse_action_cache : prevents build caching that might prevent recompilation of source code
+          bazel build --spawn_strategy=local --nouse_action_cache --modify_execution_info MNEMONIC=+no-cache //:app
+
+
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+        uses: github/codeql-action/analyze@v2
