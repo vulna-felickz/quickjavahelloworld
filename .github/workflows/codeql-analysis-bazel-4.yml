@@ -1,0 +1,47 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "Code Scanning - Bazel 4.2.2"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  CodeQL-Build:
+    # If you're only analyzing JavaScript or Python, CodeQL runs on ubuntu-latest, windows-latest, and macos-latest.
+    # If you're analyzing C/C++, C#, Go, or Java, CodeQL runs on ubuntu-latest, windows-2019, and macos-latest.
+    runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - uses: bazelbuild/setup-bazelisk@v1
+
+      # Initializes the CodeQL tools for scanning.
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: java
+          debug: true
+
+
+      - run: |
+           USE_BAZEL_VERSION=4.2.2 bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
