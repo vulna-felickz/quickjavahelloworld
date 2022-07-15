@@ -38,11 +38,11 @@ jobs:
       - uses: bazelbuild/setup-bazelisk@v2
 
       # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: java
-          debug: true
+      #- name: Initialize CodeQL
+      #  uses: github/codeql-action/init@v2
+      #  with:
+      #    languages: java
+      #    debug: true
 
       - name: CodeQL trace build step
         run: |
@@ -50,5 +50,5 @@ jobs:
           
           bazel build //:app
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+      #- name: Perform CodeQL Analysis
+      #  uses: github/codeql-action/analyze@v2
