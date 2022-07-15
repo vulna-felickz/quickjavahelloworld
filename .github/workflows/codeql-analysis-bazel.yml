@@ -37,26 +37,6 @@ jobs:
 
       - uses: bazelbuild/setup-bazelisk@v2
 
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: java
-          debug: true
-
-      - name: CodeQL trace build step
+      - name: Build
         run: |
-          set -x
-          
-          # Before building, remove cached objects
-          # and stop all running Bazel server processes.
-          bazel clean --expunge
-
-          # Build using the following Bazel flags, to help CodeQL detect the build:
-          # `--spawn_strategy=local`: build locally, instead of using a distributed build
-          # `--nouse_action_cache`: turn off build caching, which might prevent recompilation of source code
-          # `--noremote_accept_cached`, `--noremote_upload_local_results`: avoid using a remote cache
-          bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
-
-      - name: Finalize and Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+          bazel build //:app     
