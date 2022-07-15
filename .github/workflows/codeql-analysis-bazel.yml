@@ -44,22 +44,7 @@ jobs:
         run: |
           set -x
           
-          # REF: https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/
-          
-          # Before building, remove cached objects
-          # and stop all running Bazel server processes.
-          bazel clean --expunge
-
-          # Build using the following Bazel flags, to help CodeQL detect the build:
-          # `--spawn_strategy=local`: build locally, instead of using a distributed build
-          # `--nouse_action_cache`: turn off build caching, which might prevent recompilation of source code
-          # `--noremote_accept_cached`, `--noremote_upload_local_results`: avoid using a remote cache     
-          bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
-
-          # After building, stop all running Bazel server processes.
-          # This ensures future build commands start in a clean Bazel server process
-          # without CodeQL attached.
-          bazel shutdown
+          bazel build //:app
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
