@@ -53,9 +53,10 @@ jobs:
           bazel clean --expunge
 
           # Build using the following Bazel flags, to help CodeQL detect the build:
+          # `--spawn_strategy=local`: build locally, instead of using a distributed build
           # `--nouse_action_cache`: turn off build caching, which might prevent recompilation of source code
           # `--noremote_accept_cached`, `--noremote_upload_local_results`: avoid using a remote cache
-          bazel build --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
+          bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results //:app
 
-      - name: Perform CodeQL Analysis
+      - name: Finalize and Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
